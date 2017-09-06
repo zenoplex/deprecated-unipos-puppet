@@ -19,6 +19,7 @@
   "author": "Gen Ichino",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "puppeteer": "^0.10.2",
     "ramda": "^0.24.1"
   },
@@ -30,7 +31,6 @@
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
-    "dotenv": "^4.0.0",
     "eslint": "^4.4.1",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-plugin-import": "^2.7.0",
