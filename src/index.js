@@ -1,5 +1,10 @@
 // @flow
 const puppeteer = require('puppeteer');
+const { email, password } = require('./env');
+
+if (!email || !password) {
+  throw new Error('Both EMAIL and PASSWORD are required.');
+}
 
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
@@ -7,7 +12,14 @@ const puppeteer = require('puppeteer');
 
   await page.goto('https://unipos.me/login');
   await page.focus('input[type="email"]');
-  await page.type('test');
+  await page.type(email);
+  await page.focus('input[type="password"]');
+  await page.type(password);
+  await page.click('button.login_btn');
 
-  browser.close();
+  // NOTE: needs to wait for selector
+  // await page.waitForNavigation({ waitUntil: 'networkidle' });
+  await page.focus('#post-form-input');
+
+  // browser.close();
 })();
