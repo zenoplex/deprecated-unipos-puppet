@@ -18,8 +18,13 @@ if (!email || !password) {
   await page.click('button.login_btn');
 
   // NOTE: needs to wait for selector
-  // await page.waitForNavigation({ waitUntil: 'networkidle' });
+  await page.waitForFunction('window.location.href === "https://unipos.me/all"');
+  await page.waitForSelector('#post-form-input');
   await page.focus('#post-form-input');
+  await page.click('.suggestBtn_user.suggestBtn');
+  // maybe need to wait?
+  const userSelect = await page.$('#userSuggest');
+  console.log(userSelect);
 
   // browser.close();
 })();
