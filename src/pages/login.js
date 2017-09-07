@@ -1,11 +1,12 @@
 // @flow
+import type { Page } from 'puppeteer';
 
 type LoginOptions = {
   email: string,
   password: string,
 }
 
-const login: LoginOptions => Object => Promise<Object>
+const login: LoginOptions => Page => Promise<Page>
 = ({ email, password }) => async (page) => {
   await page.goto('https://unipos.me/login');
   await page.focus('input[type="email"]');

@@ -1,4 +1,5 @@
 // @flow
+import type { Page } from 'puppeteer';
 
 type SubmitOptions = {
   username: string,
@@ -6,7 +7,7 @@ type SubmitOptions = {
   hashtag?: string,
 }
 
-const submit: SubmitOptions => Object => Promise<Object>
+const submit: SubmitOptions => Page => Promise<Page>
 = ({ username, point = 1, hashtag = '' }) => async (page) => {
   await page.waitForSelector('#post-form-input');
   await page.focus('#post-form-input');
