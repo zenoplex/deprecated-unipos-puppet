@@ -1,6 +1,13 @@
 // @flow
 const puppeteer = require('puppeteer');
+const R = require('ramda');
 const { email, password } = require('./env');
+const login = require('./pages/login');
+const timeline = require('./pages/timeline');
+
+const username = 'suzuki-y';
+const point = 1;
+const hashtag = 'test';
 
 if (!email || !password) {
   throw new Error('Both EMAIL and PASSWORD are required.');
@@ -10,18 +17,9 @@ if (!email || !password) {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
-  await page.goto('https://unipos.me/login');
-  await page.focus('input[type="email"]');
-  await page.type(email);
-  await page.focus('input[type="password"]');
-  await page.type(password);
-  await page.click('button.login_btn');
-
-  await page.waitForFunction('window.location.href === "https://unipos.me/all"');
-  await page.waitForSelector('#post-form-input');
-  await page.focus('#post-form-input');
-  await page.type('@suzuki-y +1 #test', { delay: 100 });
-  await page.click('.postBtn');
-
-  browser.close();
+  R.pipeP(
+    login.login({ email, password }),
+    timeline.submit({ username, point, hashtag }),
+    () => browser.close(),
+  )(page);
 })();
