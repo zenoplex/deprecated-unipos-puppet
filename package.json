@@ -4,7 +4,7 @@
   "description": "auto unipos playground",
   "main": "lib/index.js",
   "scripts": {
-    "start": "",
+    "start": "node -r babel-register src/index",
     "lint": "eslint .",
     "typecheck": "flow check",
     "build": "babel src/**/*.js -d dist",
@@ -27,6 +27,7 @@
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-preset-flow": "^6.23.0",
+    "babel-register": "^6.26.0",
     "eslint": "^4.4.1",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-plugin-import": "^2.7.0",
