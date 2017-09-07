@@ -18,7 +18,11 @@ type AppreciateOptions = {
 const appreciate: AppreciateOptions => Promise<void>
 = async ({ username, point = 1, hashtag = 'thanks' }) => {
   // $FlowFixMe not sure why await returns Promise
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+  ],
+  });
   const page = await browser.newPage();
 
   return R.pipeP(
