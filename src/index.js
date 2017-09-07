@@ -14,6 +14,7 @@ if (!email || !password) {
 }
 
 (async () => {
+  // $FlowFixMe not sure why await returns Promise
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
