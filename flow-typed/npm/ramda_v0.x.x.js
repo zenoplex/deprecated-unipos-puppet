@@ -702,6 +702,20 @@ declare module ramda {
   // TODO pipeK
   // TODO pipeP
 
+  declare type PUnary<A,B> = A => Promise<B>;
+  declare type PipeP =
+    & (<A,B,C,D,E,F,G,H,I,J,K>(_:PUnary<A,B>, _:PUnary<B,C>, _:PUnary<C,D>, _:PUnary<D,E>, _:PUnary<E,F>, _:PUnary<F,G>, _:PUnary<G,H>, _:PUnary<H,I>, _:PUnary<I,J>, _:PUnary<J,K>, ...rest: Array<void>) => PUnary<A,K>)
+    & (<A,B,C,D,E,F,G,H,I,J>(_:PUnary<A,B>, _:PUnary<B,C>, _:PUnary<C,D>, _:PUnary<D,E>, _:PUnary<E,F>, _:PUnary<F,G>, _:PUnary<G,H>, _:PUnary<H,I>, _:PUnary<I,J>, ...rest: Array<void>) => PUnary<A,J>)
+    & (<A,B,C,D,E,F,G,H,I>(_:PUnary<A,B>, _:PUnary<B,C>, _:PUnary<C,D>, _:PUnary<D,E>, _:PUnary<E,F>, _:PUnary<F,G>, _:PUnary<G,H>, _:PUnary<H,I>, ...rest: Array<void>) => PUnary<A,I>)
+    & (<A,B,C,D,E,F,G,H>(_:PUnary<A,B>, _:PUnary<B,C>, _:PUnary<C,D>, _:PUnary<D,E>, _:PUnary<E,F>, _:PUnary<F,G>, _:PUnary<G,H>, ...rest: Array<void>) => PUnary<A,H>)
+    & (<A,B,C,D,E,F,G>(_:PUnary<A,B>, _:PUnary<B,C>, _:PUnary<C,D>, _:PUnary<D,E>, _:PUnary<E,F>, _:PUnary<F,G>, ...rest: Array<void>) => PUnary<A,G>)
+    & (<A,B,C,D,E,F>(_:PUnary<A,B>, _:PUnary<B,C>, _:PUnary<C,D>, _:PUnary<D,E>, _:PUnary<E,F>, ...rest: Array<void>) => PUnary<A,F>)
+    & (<A,B,C,D,E>(_:PUnary<A,B>, _:PUnary<B,C>, _:PUnary<C,D>, _:PUnary<D,E>, ...rest: Array<void>) => PUnary<A,E>)
+    & (<A,B,C,D>(_:PUnary<A,B>, _:PUnary<B,C>, _:PUnary<C,D>, ...rest: Array<void>) => PUnary<A,D>)
+    & (<A,B,C>(_:PUnary<A,B>, _:PUnary<B,C>, ...rest: Array<void>) => PUnary<A,C>)
+    & (<A,B>(_:PUnary<A,B>, ...rest: Array<void>) => PUnary<A,B>);
+  declare var pipeP: PipeP;
+
   declare function tap<T>(fn: (x: T) => any, ...rest: Array<void>): (x: T) => T;
   declare function tap<T>(fn: (x: T) => any, x: T): T;
 
