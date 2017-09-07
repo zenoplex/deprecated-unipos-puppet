@@ -21,7 +21,7 @@ const appreciate: AppreciateOptions => Promise<void>
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
-  R.pipeP(
+  return R.pipeP(
     login.login({ email, password }),
     timeline.submit({ username, point, hashtag }),
     () => browser.close(),
