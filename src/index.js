@@ -17,14 +17,11 @@ if (!email || !password) {
   await page.type(password);
   await page.click('button.login_btn');
 
-  // NOTE: needs to wait for selector
   await page.waitForFunction('window.location.href === "https://unipos.me/all"');
   await page.waitForSelector('#post-form-input');
   await page.focus('#post-form-input');
-  await page.click('.suggestBtn_user.suggestBtn');
-  // maybe need to wait?
-  const userSelect = await page.$('#userSuggest');
-  console.log(userSelect);
+  await page.type('@suzuki-y +1 #test', { delay: 100 });
+  await page.click('.postBtn');
 
-  // browser.close();
+  browser.close();
 })();
