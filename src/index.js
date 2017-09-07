@@ -17,11 +17,11 @@ app
     appreciate({ username: 'suzuki-y' })
       .then(() => {
         res.status(200);
-        res.end();
+        res.json({ status: 'success' });
       })
-      .catch(() => {
+      .catch((error) => {
         res.status(422);
-        res.end();
+        res.json({ status: 'error', message: error });
       });
   })
   .listen(port, () => {
