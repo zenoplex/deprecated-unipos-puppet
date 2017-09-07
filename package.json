@@ -2,15 +2,16 @@
   "name": "unipos-puppet",
   "version": "0.0.1",
   "description": "auto unipos playground",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "node -r babel-register src/index",
     "lint": "eslint .",
     "typecheck": "flow check",
-    "build": "babel src/**/*.js -d dist",
-    "build:watch": "babel --watch src/**/*.js -d dist",
+    "build": "babel src -d dist",
+    "build:watch": "babel --watch src -d dist",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "heroku-prebuild": "yarn build"
   },
   "keywords": [
     "unipos",
