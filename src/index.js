@@ -5,6 +5,7 @@ const basicAuth = require('express-basic-auth');
 const cors = require('cors');
 const { auth, port } = require('./env');
 const { appreciate } = require('./appreciate');
+const { test } = require('./test');
 
 const app = express();
 
@@ -21,6 +22,11 @@ if (auth) {
 app
   .use(cors())
   .use(bodyParser.json())
+  .get('/', (req, res) => {
+    test().then(() => {
+      res.end();
+    });
+  })
   // $FlowFixMe post doesn't exist?
   .post('/', (req, res) => {
     appreciate(req.body)
