@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const R = require('ramda');
 const login = require('./pages/login');
 const timeline = require('./pages/timeline');
+const { nodeEnv } = require('./env');
 
 type AppreciateOptions = {
   email: string,
@@ -22,7 +23,7 @@ const appreciate: AppreciateOptions => Promise<void>
   // $FlowFixMe not sure why await returns Promise
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    headless: false,
+    headless: nodeEnv !== 'production',
   });
   const page = await browser.newPage();
 
