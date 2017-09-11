@@ -11,10 +11,7 @@ app
   .use(bodyParser.json())
   // $FlowFixMe post doesn't exist?
   .post('/', (req, res) => {
-    const data = JSON.stringify(req.body, null, 2);
-    console.log(data);
-
-    appreciate({ username: 'suzuki-y' })
+    appreciate(req.body)
       .then(() => {
         res.status(200);
         res.json({ status: 'success' });
