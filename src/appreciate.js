@@ -26,12 +26,13 @@ const appreciate: AppreciateOptions => Promise<void>
     headless: nodeEnv === 'production',
   });
   const page = await browser.newPage();
+  await page.goto('https://unipos.me/login', { waitUntil: 'networkidle' });
 
-  return R.pipeP(
-    login.login({ email, password }),
-    timeline.submit({ username, point, hashtag, message }),
-    () => browser.close(),
-  )(page);
+  // return R.pipeP(
+  //   login.login({ email, password }),
+  //   timeline.submit({ username, point, hashtag, message }),
+  //   () => browser.close(),
+  // )(page);
 };
 
 module.exports = {
