@@ -28,11 +28,11 @@ const appreciate: AppreciateOptions => Promise<void>
   const page = await browser.newPage();
   await page.goto('https://unipos.me/login', { waitUntil: 'networkidle' });
 
-  // return R.pipeP(
-  //   login.login({ email, password }),
-  //   timeline.submit({ username, point, hashtag, message }),
-  //   () => browser.close(),
-  // )(page);
+  R.pipeP(
+    login.login({ email, password }),
+    timeline.submit({ username, point, hashtag, message }),
+    () => browser.close(),
+  )(page);
 };
 
 module.exports = {
