@@ -23,7 +23,7 @@ const appreciate: AppreciateOptions => Promise<void>
   // $FlowFixMe not sure why await returns Promise
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    headless: nodeEnv !== 'production',
+    headless: nodeEnv === 'production',
   });
   const page = await browser.newPage();
 
