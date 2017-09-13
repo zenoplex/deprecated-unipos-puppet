@@ -10,7 +10,6 @@ const test: () => Promise<void>
   });
   const page = await browser.newPage();
   await page.goto('https://news.ycombinator.com', { waitUntil: 'networkidle' });
-
   if (browser.close) browser.close();
 };
 
