@@ -20,19 +20,16 @@ const appreciate: AppreciateOptions => Promise<void>
     throw new Error('Both email and password are required.');
   }
 
-  // $FlowFixMe not sure why await returns Promise
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
     headless: nodeEnv === 'production',
   });
   const page = await browser.newPage();
-  await page.goto('https://unipos.me/login', { waitUntil: 'networkidle' });
-
-  R.pipeP(
+  await R.pipeP(
     login.login({ email, password }),
     timeline.submit({ username, point, hashtag, message }),
-    () => browser.close(),
   )(page);
+  if (browser.close) browser.close();
 };
 
 module.exports = {
