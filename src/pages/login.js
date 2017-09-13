@@ -8,7 +8,7 @@ type LoginOptions = {
 
 const login: LoginOptions => Page => Promise<Page>
 = ({ email, password }) => async (page) => {
-  await page.goto('https://unipos.me/login');
+  await page.goto('https://unipos.me/login', { waitUntil: 'networkidle' });
   await page.focus('input[type="email"]');
   await page.type(email);
   await page.focus('input[type="password"]');
